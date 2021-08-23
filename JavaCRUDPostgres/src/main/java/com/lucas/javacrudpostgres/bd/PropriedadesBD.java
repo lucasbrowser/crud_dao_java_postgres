@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.System.Logger.Level;
 import java.util.logging.Logger;
 
 /**
@@ -57,7 +56,8 @@ public class PropriedadesBD {
             if (bancoDados.equalsIgnoreCase(POSTGRES)) {
                 url = "jdbc:postgresql://"+ localServidor.trim()+":5432/"+nomeBanco.trim()+"";
                 driver = "org.postgresql.Driver";
-            } 
+            }
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PropriedadesBD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IOException ex) {

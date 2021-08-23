@@ -16,6 +16,11 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.18</version>
         </dependency>
+        <dependency>
+            <groupId>towel.es</groupId>
+            <artifactId>towel</artifactId>
+            <version>1.2.2</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>javaCrudPostgres</finalName>
@@ -35,7 +40,7 @@
                 <configuration>
                    <archive>
                        <manifest>
-                           <mainClass>com.lucas.martinelloproject.Principal</mainClass>
+                           <mainClass>com.lucas.javacrudpostgres.Main</mainClass>
                        </manifest>
                    </archive>
                    <descriptorRefs>

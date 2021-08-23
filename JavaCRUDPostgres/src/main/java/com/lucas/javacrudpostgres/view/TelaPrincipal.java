@@ -41,13 +41,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         miSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema de Cálculo de Combustível");
+        setTitle("Sistema Empresarial");
         setIconImages(null);
 
         toolBar.setFloatable(false);
 
-        bCombustivel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combustivel.png"))); // NOI18N
-        bCombustivel.setText("Combustível");
+        bCombustivel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/departamento.png"))); // NOI18N
+        bCombustivel.setText("Departamento");
         bCombustivel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bCombustivel.setFocusable(false);
         bCombustivel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

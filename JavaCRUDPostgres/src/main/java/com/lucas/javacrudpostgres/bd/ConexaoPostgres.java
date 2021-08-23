@@ -35,11 +35,8 @@ public class ConexaoPostgres {
     public Connection conectar(){
         try {
             propriedadesBD =  new PropriedadesBD();
-            //Driver do PostgreSQL
-            //            Class.forName("com.mysql.jdbc.Driver").newInstance();
             Class.forName(propriedadesBD.getDriver());
-            //local do banco, nome do banco, usuario e senha
-            //            String url = "jdbc:mysql://" + servidor + "/" + nomeDoBanco;
+
             this.setCon((Connection) DriverManager.getConnection(propriedadesBD.getUrl(), propriedadesBD.getUsuario(), propriedadesBD.getSenha()));
             //se ocorrer tudo bem, ou seja, se conectar a linha a segui é executada
             JOptionPane.showMessageDialog(null, "Conectado com sucesso!");
@@ -77,8 +74,7 @@ public class ConexaoPostgres {
     }
     
     public boolean executarUpdateDeleteSQL(String pSQL){
-        try {
-            
+        try {         
             //createStatement de con para criar o Statement
             this.setStatement(getCon().createStatement());
 
@@ -105,7 +101,7 @@ public class ConexaoPostgres {
             // Definido o Statement, executamos a query no banco de dados
             this.getStatement().execute(pSQL);
             
-            //consulta o ultimo id inserido
+            //consulta o último id inserido
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;

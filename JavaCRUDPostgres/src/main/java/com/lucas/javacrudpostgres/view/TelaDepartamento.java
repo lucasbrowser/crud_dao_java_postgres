@@ -5,17 +5,36 @@
  */
 package com.lucas.javacrudpostgres.view;
 
+import com.lucas.javacrudpostgres.control.DepartamentoControl;
+import com.lucas.javacrudpostgres.model.domain.Departamento;
+import com.towel.swing.table.ObjectTableModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas
  */
 public class TelaDepartamento extends javax.swing.JInternalFrame {
+    
+    private final ObjectTableModel<Departamento> otmDepartamento = new ObjectTableModel<>(Departamento.class, "codigo,descricao");
+    
+    private final DepartamentoControl departamentoControl = new DepartamentoControl();
 
     /**
      * Creates new form TelaDepartamento
      */
     public TelaDepartamento() {
         initComponents();
+        carregarGrade();
+    }
+    
+    private void carregarGrade() {
+        
+        try {      
+            otmDepartamento.setData(departamentoControl.listarTodos());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar grade.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -27,17 +46,53 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblDepartamento = new javax.swing.JLabel();
+        txtDepartamento = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        setClosable(true);
+        setIconifiable(true);
+        setResizable(true);
         setTitle("Cadastro de Departamento");
+
+        lblDepartamento.setText("Departamento:");
+
+        jButton1.setText("Adicionar");
+
+        jTable1.setModel(otmDepartamento);
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblDepartamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDepartamento)
+                    .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -45,5 +100,10 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblDepartamento;
+    private javax.swing.JTextField txtDepartamento;
     // End of variables declaration//GEN-END:variables
 }
