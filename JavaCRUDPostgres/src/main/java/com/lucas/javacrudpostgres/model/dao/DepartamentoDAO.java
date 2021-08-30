@@ -39,4 +39,25 @@ public class DepartamentoDAO extends ConexaoPostgres{
         return lDepartamento;
     }
     
+    public Departamento recuperar(int codigo) throws Exception {
+        Departamento departamento = new Departamento();
+        try{
+            this.conectar();
+            String sql = "SELECT * FROM DEPARTAMENTO WHERE CODIGO=?";
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                departamento.setCodigo(rs.getInt("CODIGO"));
+                departamento.setDescricao(rs.getString("DESCRICAO"));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            this.fecharConexao();
+        }
+        return departamento;
+    }
+
+    
 }

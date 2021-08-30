@@ -39,7 +39,6 @@ public class ConexaoPostgres {
 
             this.setCon((Connection) DriverManager.getConnection(propriedadesBD.getUrl(), propriedadesBD.getUsuario(), propriedadesBD.getSenha()));
             //se ocorrer tudo bem, ou seja, se conectar a linha a segui é executada
-            JOptionPane.showMessageDialog(null, "Conectado com sucesso!");
             this.status = true;
             
         } catch (ClassNotFoundException ex) {

@@ -28,6 +28,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         toolBar = new javax.swing.JToolBar();
         bCombustivel = new javax.swing.JButton();
+        bFuncionario = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
         desktopPane = new javax.swing.JDesktopPane();
         lblNome = new javax.swing.JLabel();
@@ -35,6 +36,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         mCadastro = new javax.swing.JMenu();
         miDepartamento = new javax.swing.JMenuItem();
+        miFuncionario = new javax.swing.JMenuItem();
         mFerramentas = new javax.swing.JMenu();
         miTestarConexao = new javax.swing.JMenuItem();
         mSistema = new javax.swing.JMenu();
@@ -59,6 +61,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         toolBar.add(bCombustivel);
+
+        bFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/funcionarios.png"))); // NOI18N
+        bFuncionario.setText("Funcionário");
+        bFuncionario.setFocusable(false);
+        bFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFuncionarioActionPerformed(evt);
+            }
+        });
+        toolBar.add(bFuncionario);
 
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sair.png"))); // NOI18N
         btSair.setText("Sair");
@@ -101,6 +115,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         mCadastro.add(miDepartamento);
+
+        miFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        miFuncionario.setText("Funcionário");
+        miFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFuncionarioActionPerformed(evt);
+            }
+        });
+        mCadastro.add(miFuncionario);
 
         menuBar.add(mCadastro);
 
@@ -155,8 +178,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         c.setVisible(true);
     }//GEN-LAST:event_miTestarConexaoActionPerformed
 
+    private void miFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFuncionarioActionPerformed
+        TelaFuncionario c = new TelaFuncionario();
+        desktopPane.add(c);
+        c.setVisible(true);
+    }//GEN-LAST:event_miFuncionarioActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCombustivel;
+    private javax.swing.JButton bFuncionario;
     private javax.swing.JButton btSair;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel lblData;
@@ -166,6 +196,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mSistema;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem miDepartamento;
+    private javax.swing.JMenuItem miFuncionario;
     private javax.swing.JMenuItem miSair;
     private javax.swing.JMenuItem miTestarConexao;
     private javax.swing.JToolBar toolBar;
