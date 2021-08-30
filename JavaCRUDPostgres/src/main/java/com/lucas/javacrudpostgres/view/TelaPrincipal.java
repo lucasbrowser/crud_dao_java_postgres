@@ -37,6 +37,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mCadastro = new javax.swing.JMenu();
         miDepartamento = new javax.swing.JMenuItem();
         miFuncionario = new javax.swing.JMenuItem();
+        miUsuario = new javax.swing.JMenuItem();
         mFerramentas = new javax.swing.JMenu();
         miTestarConexao = new javax.swing.JMenuItem();
         mSistema = new javax.swing.JMenu();
@@ -125,6 +126,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         mCadastro.add(miFuncionario);
 
+        miUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        miUsuario.setText("Usuário");
+        miUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miUsuarioActionPerformed(evt);
+            }
+        });
+        mCadastro.add(miUsuario);
+
         menuBar.add(mCadastro);
 
         mFerramentas.setText("Ferramentas");
@@ -184,6 +194,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         c.setVisible(true);
     }//GEN-LAST:event_miFuncionarioActionPerformed
 
+    private void miUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUsuarioActionPerformed
+        TelaUsuario c = new TelaUsuario();
+        desktopPane.add(c);
+        c.setVisible(true);
+    }//GEN-LAST:event_miUsuarioActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCombustivel;
     private javax.swing.JButton bFuncionario;
@@ -199,6 +215,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem miFuncionario;
     private javax.swing.JMenuItem miSair;
     private javax.swing.JMenuItem miTestarConexao;
+    private javax.swing.JMenuItem miUsuario;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }

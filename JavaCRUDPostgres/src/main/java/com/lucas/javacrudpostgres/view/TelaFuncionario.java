@@ -9,6 +9,7 @@ import com.lucas.javacrudpostgres.control.FuncionarioControl;
 import com.lucas.javacrudpostgres.model.domain.Departamento;
 import com.lucas.javacrudpostgres.model.domain.Funcionario;
 import com.towel.swing.table.ObjectTableModel;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -77,6 +78,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         setTitle("Cadastro de Funcionários");
 
         bNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/novo.png"))); // NOI18N
+        bNovo.setMnemonic(KeyEvent.VK_N);
         bNovo.setText("Novo");
         bNovo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         bNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +88,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         });
 
         bSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salvar.png"))); // NOI18N
+        bSalvar.setMnemonic(KeyEvent.VK_S);
         bSalvar.setText("Salvar");
         bSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,9 +97,11 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         });
 
         bRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        bRemover.setMnemonic(KeyEvent.VK_R);
         bRemover.setText("Remover");
 
         bCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
+        bCancelar.setMnemonic(KeyEvent.VK_C);
         bCancelar.setText("Cancelar");
         bCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,14 +141,37 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNome.setText("Nome:");
 
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("Cargo:");
+
+        txtCargo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCargoKeyPressed(evt);
+            }
+        });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Salário:");
 
         ftfSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        ftfSalario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ftfSalarioKeyPressed(evt);
+            }
+        });
 
         lblDepartamento.setText("Departamento:");
+
+        ftfDepartamento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ftfDepartamentoKeyPressed(evt);
+            }
+        });
 
         bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscar.png"))); // NOI18N
         bBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +266,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         funcionario = new Funcionario();
         habilitarFormulario(true);
         bRemover.setEnabled(false);
+        txtNome.requestFocus();
     }//GEN-LAST:event_bNovoActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
@@ -285,6 +314,30 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             carregarGrade();
         }
     }//GEN-LAST:event_bSalvarActionPerformed
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+          txtCargo.requestFocus();
+        }
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtCargoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCargoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+          ftfSalario.requestFocus();
+        }
+    }//GEN-LAST:event_txtCargoKeyPressed
+
+    private void ftfSalarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ftfSalarioKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+          ftfDepartamento.requestFocus();
+        }
+    }//GEN-LAST:event_ftfSalarioKeyPressed
+
+    private void ftfDepartamentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ftfDepartamentoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+          bBuscar.requestFocus();
+        }
+    }//GEN-LAST:event_ftfDepartamentoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

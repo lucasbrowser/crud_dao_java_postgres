@@ -86,7 +86,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         lblNome.setText("Nome:");
 
-        jTable1.setModel(otmDepartamento);
         jScrollPane1.setViewportView(jTable1);
 
         lblPerfil.setText("Perfil:");
