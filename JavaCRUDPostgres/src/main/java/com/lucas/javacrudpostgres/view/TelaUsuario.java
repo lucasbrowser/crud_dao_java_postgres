@@ -5,8 +5,8 @@
  */
 package com.lucas.javacrudpostgres.view;
 
-import com.lucas.javacrudpostgres.control.DepartamentoControl;
-import com.lucas.javacrudpostgres.model.domain.Departamento;
+import com.lucas.javacrudpostgres.control.UsuarioControl;
+import com.lucas.javacrudpostgres.model.domain.Usuario;
 import com.towel.swing.table.ObjectTableModel;
 import javax.swing.JOptionPane;
 
@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class TelaUsuario extends javax.swing.JInternalFrame {
     
-    private final ObjectTableModel<Departamento> otmDepartamento = new ObjectTableModel<>(Departamento.class, "codigo,descricao");
+    private final ObjectTableModel<Usuario> otmUsuario = new ObjectTableModel<>(Usuario.class, "codigo,nome,perfil");
     
-    private final DepartamentoControl departamentoControl = new DepartamentoControl();
+    private final UsuarioControl usuarioControl = new UsuarioControl();
 
     /**
      * Creates new form TelaDepartamento
@@ -31,7 +31,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private void carregarGrade() {
         
         try {      
-            otmDepartamento.setData(departamentoControl.listarTodos());
+            otmUsuario.setData(usuarioControl.listarTodos());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar grade.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -86,6 +86,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         lblNome.setText("Nome:");
 
+        jTable1.setModel(otmUsuario);
         jScrollPane1.setViewportView(jTable1);
 
         lblPerfil.setText("Perfil:");

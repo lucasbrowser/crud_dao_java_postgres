@@ -5,7 +5,7 @@
  */
 package com.lucas.javacrudpostgres;
 
-import com.lucas.javacrudpostgres.view.TelaPrincipal;
+import com.lucas.javacrudpostgres.view.TelaLogin;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class Main {
     
     public static void main(String[] args){
         lookAndFeel();
-        TelaPrincipal telaPrincipal = new TelaPrincipal();
+        TelaLogin telaPrincipal = new TelaLogin();
         telaPrincipal.setVisible(true);
     }
     

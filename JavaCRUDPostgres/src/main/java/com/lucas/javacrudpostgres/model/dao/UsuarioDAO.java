@@ -42,4 +42,30 @@ public class UsuarioDAO extends ConexaoPostgres{
         return lUsuario;
     }
     
+    public Usuario logar(String login, String senha) throws Exception {
+        Usuario usuario = new Usuario();
+        try{
+            this.conectar();
+            String sql = "SELECT * FROM USUARIO WHERE LOGIN=? AND SENHA=?";
+            PreparedStatement ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                usuario.setCodigo(rs.getInt("CODIGO"));
+                usuario.setNome(rs.getString("NOME"));
+                usuario.setPerfil(rs.getString("PERFIL"));
+                usuario.setLogin(rs.getString("LOGIN"));
+                usuario.setSenha(rs.getString("SENHA"));
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            this.fecharConexao();
+        }
+        return usuario;
+    }
+    
 }

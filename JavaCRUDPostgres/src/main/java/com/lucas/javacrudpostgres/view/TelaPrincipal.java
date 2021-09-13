@@ -26,12 +26,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         toolBar = new javax.swing.JToolBar();
         bCombustivel = new javax.swing.JButton();
         bFuncionario = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
         desktopPane = new javax.swing.JDesktopPane();
-        lblNome = new javax.swing.JLabel();
+        pStatusBar = new javax.swing.JPanel();
+        lblUsuarioTitle = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         mCadastro = new javax.swing.JMenu();
@@ -42,6 +45,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         miTestarConexao = new javax.swing.JMenuItem();
         mSistema = new javax.swing.JMenu();
         miSair = new javax.swing.JMenuItem();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Empresarial");
@@ -93,16 +98,43 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(toolBar, java.awt.BorderLayout.PAGE_START);
 
         desktopPane.setOpaque(false);
-
-        lblNome.setText(".");
-        desktopPane.add(lblNome);
-        lblNome.setBounds(790, 580, 160, 14);
-
-        lblData.setText("........");
-        desktopPane.add(lblData);
-        lblData.setBounds(670, 600, 310, 14);
-
         getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
+
+        pStatusBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblUsuarioTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblUsuarioTitle.setText("Usuário:");
+
+        lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        lblData.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblData.setText("........");
+
+        javax.swing.GroupLayout pStatusBarLayout = new javax.swing.GroupLayout(pStatusBar);
+        pStatusBar.setLayout(pStatusBarLayout);
+        pStatusBarLayout.setHorizontalGroup(
+            pStatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pStatusBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUsuarioTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pStatusBarLayout.setVerticalGroup(
+            pStatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pStatusBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pStatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblUsuarioTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        getContentPane().add(pStatusBar, java.awt.BorderLayout.PAGE_END);
 
         mCadastro.setText("Cadastro");
 
@@ -164,7 +196,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(menuBar);
 
-        setSize(new java.awt.Dimension(1040, 807));
+        setSize(new java.awt.Dimension(1040, 735));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -205,8 +237,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton bFuncionario;
     private javax.swing.JButton btSair;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblData;
-    public javax.swing.JLabel lblNome;
+    public javax.swing.JLabel lblUsuario;
+    private javax.swing.JLabel lblUsuarioTitle;
     private javax.swing.JMenu mCadastro;
     private javax.swing.JMenu mFerramentas;
     private javax.swing.JMenu mSistema;
@@ -216,6 +250,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem miSair;
     private javax.swing.JMenuItem miTestarConexao;
     private javax.swing.JMenuItem miUsuario;
+    private javax.swing.JPanel pStatusBar;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }

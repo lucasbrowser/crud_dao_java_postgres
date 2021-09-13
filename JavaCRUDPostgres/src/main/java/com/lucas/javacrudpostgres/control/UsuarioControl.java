@@ -22,4 +22,8 @@ public class UsuarioControl {
         return usuarioDAO.listarTodos();
     }
     
+    public Usuario logarUsuario(String login, String senha) throws Exception {
+        return usuarioDAO.logar(login, senha);
+    }
+    
 }
