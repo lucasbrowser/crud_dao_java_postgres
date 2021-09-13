@@ -30,4 +30,8 @@ public class FuncionarioControl {
         funcionarioDAO.alterar(funcionario);
     }
     
+    public void excluirFuncionario(Funcionario funcionario) throws Exception {
+        funcionarioDAO.excluir(funcionario);
+    }
+    
 }

@@ -99,6 +99,11 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         bRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
         bRemover.setMnemonic(KeyEvent.VK_R);
         bRemover.setText("Remover");
+        bRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRemoverActionPerformed(evt);
+            }
+        });
 
         bCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         bCancelar.setMnemonic(KeyEvent.VK_C);
@@ -338,6 +343,21 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
           bBuscar.requestFocus();
         }
     }//GEN-LAST:event_ftfDepartamentoKeyPressed
+
+    private void bRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverActionPerformed
+        int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o funcionário " + funcionario + "?");
+        if (opcao == 0) {
+            try {
+                funcionarioControl.excluirFuncionario(funcionario);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o funcionário.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            habilitarFormulario(false);
+            carregarGrade();
+        }
+    }//GEN-LAST:event_bRemoverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

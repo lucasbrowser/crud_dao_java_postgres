@@ -27,6 +27,7 @@ public class TelaModalDepartamento extends javax.swing.JDialog {
 
     /**
      * Creates new form TelaModalDepartamento
+     * @param parent
      */
     public TelaModalDepartamento(JInternalFrame parent) {
         super();
@@ -61,6 +62,7 @@ public class TelaModalDepartamento extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Departamento");
+        setModal(true);
 
         lblFiltroDepartamento.setText("Filtro:");
 
@@ -119,13 +121,16 @@ public class TelaModalDepartamento extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFiltroDepartamentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroDepartamentoKeyReleased
-        TableRowSorter rs = (TableRowSorter) tpFiltroDepartamento.getRowSorter();
-        rs.setRowFilter(RowFilter.regexFilter("(?i)" + txtFiltroDepartamento.getText(), 0, 1));
+        TableRowSorter rs = new TableRowSorter(otmFiltroDepartamento);
+        rs.setRowFilter(RowFilter.regexFilter("(?i)" + txtFiltroDepartamento.getText().trim()));
+        tpFiltroDepartamento.setRowSorter(rs);
     }//GEN-LAST:event_txtFiltroDepartamentoKeyReleased
 
     private void tpFiltroDepartamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tpFiltroDepartamentoMouseClicked
         if (evt.getClickCount() >= 2) {
-            Departamento departamento = otmFiltroDepartamento.getValue(tpFiltroDepartamento.getSelectedRow());
+            
+            int linhaSelecionada = tpFiltroDepartamento.getRowSorter().convertRowIndexToModel(tpFiltroDepartamento.getSelectedRow());
+            Departamento departamento = otmFiltroDepartamento.getValue(linhaSelecionada);
 
             if (parent instanceof TelaFuncionario) {
                 TelaFuncionario tf = (TelaFuncionario) parent;

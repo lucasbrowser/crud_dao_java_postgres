@@ -81,4 +81,19 @@ public class FuncionarioDAO extends ConexaoPostgres{
         }
     }
     
+    public void excluir(Funcionario funcionario) throws Exception {
+        try {
+            this.conectar();
+            this.executarUpdateDeleteSQL(
+                "DELETE FROM FUNCIONARIO "
+                + " WHERE "
+                    + "CODIGO = '" + funcionario.getCodigo() + "'"
+                + ";"
+            );
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            this.fecharConexao();
+        }
+    }
 }

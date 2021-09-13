@@ -9,4 +9,4 @@ teste
 USUARIO
 postgres
 SENHA
-suasenha
+123456
