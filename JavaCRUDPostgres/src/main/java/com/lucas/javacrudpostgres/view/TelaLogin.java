@@ -29,8 +29,8 @@ public class TelaLogin extends javax.swing.JFrame {
             usuario = usuarioControl.logarUsuario(txtLogin.getText(), passSenha.getText());
 
             if (usuario.getNome() != null) {
-                TelaPrincipal principal = new TelaPrincipal(); // aciona a tela principal
-                principal.setVisible(true);
+                TelaPrincipal principal = new TelaPrincipal(usuario); // aciona a tela principal      
+                principal.setVisible(true);  
                 principal.lblUsuario.setText(usuario.getNome());
                 this.dispose(); // fecha a tela de login
             } else {

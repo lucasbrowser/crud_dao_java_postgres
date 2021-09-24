@@ -206,12 +206,12 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bSalvarDeptoActionPerformed
 
     private void bRemoverDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverDeptoActionPerformed
-        int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o funcionário " + departamento + "?");
+        int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o departamento " + departamento + "?");
         if (opcao == 0) {
             try {
                 departamentoControl.excluirDepartamento(departamento);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir o funcionário.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o departamento.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 

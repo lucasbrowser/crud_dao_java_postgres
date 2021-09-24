@@ -78,7 +78,7 @@ public class DepartamentoDAO extends ConexaoPostgres{
         try {
             this.conectar();
             this.executarUpdateDeleteSQL(
-                "UPDATE FUNCIONARIO SET "
+                "UPDATE DEPARTAMENTO SET "
                     + "DESCRICAO = '" + departamento.getDescricao() + "'"
                 + " WHERE "
                     + "CODIGO = '" + departamento.getCodigo() + "'"

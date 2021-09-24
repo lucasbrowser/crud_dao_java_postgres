@@ -1,5 +1,6 @@
 package com.lucas.javacrudpostgres.view;
 
+import com.lucas.javacrudpostgres.model.domain.Usuario;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -12,9 +13,11 @@ import javax.swing.UIManager;
  * @author lucas
  */
 public class TelaPrincipal extends javax.swing.JFrame {
+    
 
-    public TelaPrincipal() {
+    public TelaPrincipal(Usuario usuario) {
         initComponents();
+        perfilUsuario(usuario);
         Locale locale = new Locale("pt","BR"); 
         GregorianCalendar calendar = new GregorianCalendar();
         SimpleDateFormat dataHora = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' - 'HH':'mm'.'",locale); 
@@ -253,4 +256,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pStatusBar;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
+    
+    
+    public void perfilUsuario(Usuario usuario) {
+        String nivel = usuario.getPerfil().substring(0,1);
+        if (nivel.equals("B")) {
+            miDepartamento.setEnabled(false);
+            miUsuario.setEnabled(false);
+        } else if (nivel.equals("S")) {
+            miUsuario.setEnabled(false);
+        }
+    }
+    
+    
+
+
+
+
 }
