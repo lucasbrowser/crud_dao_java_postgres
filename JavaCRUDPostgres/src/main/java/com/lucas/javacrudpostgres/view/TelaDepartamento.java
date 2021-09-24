@@ -19,12 +19,15 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
     private final ObjectTableModel<Departamento> otmDepartamento = new ObjectTableModel<>(Departamento.class, "codigo,descricao");
     
     private final DepartamentoControl departamentoControl = new DepartamentoControl();
+    
+    private Departamento departamento;
 
     /**
      * Creates new form TelaDepartamento
      */
     public TelaDepartamento() {
         initComponents();
+        habilitarFormulario(false);
         carregarGrade();
     }
     
@@ -46,23 +49,92 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pBarraFerramentas = new javax.swing.JPanel();
+        bNovoDepto = new javax.swing.JButton();
+        bSalvarDepto = new javax.swing.JButton();
+        bRemoverDepto = new javax.swing.JButton();
+        bCancelarDepto = new javax.swing.JButton();
         lblDepartamento = new javax.swing.JLabel();
         txtDepartamento = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tpDepartamento = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
         setTitle("Cadastro de Departamento");
 
+        bNovoDepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/novo.png"))); // NOI18N
+        bNovoDepto.setText("Novo");
+        bNovoDepto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bNovoDepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNovoDeptoActionPerformed(evt);
+            }
+        });
+
+        bSalvarDepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salvar.png"))); // NOI18N
+        bSalvarDepto.setText("Salvar");
+        bSalvarDepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalvarDeptoActionPerformed(evt);
+            }
+        });
+
+        bRemoverDepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        bRemoverDepto.setText("Remover");
+        bRemoverDepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRemoverDeptoActionPerformed(evt);
+            }
+        });
+
+        bCancelarDepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
+        bCancelarDepto.setText("Cancelar");
+        bCancelarDepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelarDeptoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pBarraFerramentasLayout = new javax.swing.GroupLayout(pBarraFerramentas);
+        pBarraFerramentas.setLayout(pBarraFerramentasLayout);
+        pBarraFerramentasLayout.setHorizontalGroup(
+            pBarraFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBarraFerramentasLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(bNovoDepto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bSalvarDepto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bRemoverDepto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bCancelarDepto)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pBarraFerramentasLayout.setVerticalGroup(
+            pBarraFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBarraFerramentasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pBarraFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bCancelarDepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pBarraFerramentasLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(bRemoverDepto, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                    .addComponent(bNovoDepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bSalvarDepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         lblDepartamento.setText("Departamento:");
 
-        jButton1.setText("Adicionar");
-
-        jTable1.setModel(otmDepartamento);
-        jScrollPane1.setViewportView(jTable1);
+        tpDepartamento.setModel(otmDepartamento);
+        tpDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tpDepartamentoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tpDepartamento);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,26 +143,29 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lblDepartamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(lblDepartamento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 23, Short.MAX_VALUE))
+                    .addComponent(pBarraFerramentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(4, 4, 4)
+                .addComponent(pBarraFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDepartamento)
-                    .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                    .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
@@ -98,12 +173,98 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bNovoDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNovoDeptoActionPerformed
+        departamento = new Departamento();
+        habilitarFormulario(true);
+        bRemoverDepto.setEnabled(false);
+        txtDepartamento.requestFocus();
+    }//GEN-LAST:event_bNovoDeptoActionPerformed
+
+    private void bSalvarDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarDeptoActionPerformed
+        
+        departamento.setDescricao(txtDepartamento.getText().trim());
+
+        if (departamento.getCodigo() == 0) {
+            try {
+                departamentoControl.inserirDepartamento(departamento);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar o departamento.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else {
+            try {
+                departamentoControl.alterarDepartamento(departamento);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao alterar o departamento.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+            habilitarFormulario(false);
+            carregarGrade();
+        
+    }//GEN-LAST:event_bSalvarDeptoActionPerformed
+
+    private void bRemoverDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverDeptoActionPerformed
+        int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o funcionário " + departamento + "?");
+        if (opcao == 0) {
+            try {
+                departamentoControl.excluirDepartamento(departamento);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o funcionário.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            habilitarFormulario(false);
+            carregarGrade();
+        }
+    }//GEN-LAST:event_bRemoverDeptoActionPerformed
+
+    private void bCancelarDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarDeptoActionPerformed
+        habilitarFormulario(false);
+    }//GEN-LAST:event_bCancelarDeptoActionPerformed
+
+    private void tpDepartamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tpDepartamentoMouseClicked
+        if (evt.getClickCount() >= 2) {
+            
+            departamento = otmDepartamento.getValue(tpDepartamento.getSelectedRow());
+
+            txtDepartamento.setText(departamento.getDescricao());
+
+            habilitarFormulario(true);
+
+        }
+    }//GEN-LAST:event_tpDepartamentoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bCancelarDepto;
+    private javax.swing.JButton bNovoDepto;
+    private javax.swing.JButton bRemoverDepto;
+    private javax.swing.JButton bSalvarDepto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDepartamento;
+    private javax.swing.JPanel pBarraFerramentas;
+    private javax.swing.JTable tpDepartamento;
     private javax.swing.JTextField txtDepartamento;
     // End of variables declaration//GEN-END:variables
+
+    private void habilitarFormulario(boolean b) {
+        bNovoDepto.setEnabled(!b);
+        bSalvarDepto.setEnabled(b);
+        bRemoverDepto.setEnabled(b);
+        bCancelarDepto.setEnabled(b);
+        txtDepartamento.setEnabled(b);
+        tpDepartamento.setEnabled(!b);
+
+        if (!b) {
+            limpaFormulario();
+        }
+    }
+    
+    private void limpaFormulario() {
+        departamento = null;
+        txtDepartamento.setText("");
+    }
+
 }

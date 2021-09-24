@@ -26,4 +26,15 @@ public class UsuarioControl {
         return usuarioDAO.logar(login, senha);
     }
     
+    public void inserirUsuario(Usuario usuario) throws Exception {
+        usuarioDAO.inserir(usuario);
+    }
+    
+    public void alterarUsuario(Usuario usuario) throws Exception {
+        usuarioDAO.alterar(usuario);
+    }
+    
+    public void excluirUsuario(Usuario usuario) throws Exception {
+        usuarioDAO.excluir(usuario);
+    }
 }

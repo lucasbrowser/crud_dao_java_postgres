@@ -58,6 +58,54 @@ public class DepartamentoDAO extends ConexaoPostgres{
         }
         return departamento;
     }
+    
+    public void inserir(Departamento departamento) throws Exception {
+        try{
+            this.conectar();
+            this.insertSQL("INSERT INTO DEPARTAMENTO (DESCRICAO) "
+                    + "VALUES ("
+                    + "'" + departamento.getDescricao() + "'"
+                    + ");"
+            );
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            this.fecharConexao();
+        }
+    }
+    
+    public void alterar(Departamento departamento) throws Exception {
+        try {
+            this.conectar();
+            this.executarUpdateDeleteSQL(
+                "UPDATE FUNCIONARIO SET "
+                    + "DESCRICAO = '" + departamento.getDescricao() + "'"
+                + " WHERE "
+                    + "CODIGO = '" + departamento.getCodigo() + "'"
+                + ";"
+            );
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            this.fecharConexao();
+        }
+    }
+    
+    public void excluir(Departamento departamento) throws Exception {
+        try {
+            this.conectar();
+            this.executarUpdateDeleteSQL(
+                "DELETE FROM DEPARTAMENTO "
+                + " WHERE "
+                    + "CODIGO = '" + departamento.getCodigo() + "'"
+                + ";"
+            );
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            this.fecharConexao();
+        }
+    }
 
     
 }

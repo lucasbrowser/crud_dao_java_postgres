@@ -19,12 +19,15 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private final ObjectTableModel<Usuario> otmUsuario = new ObjectTableModel<>(Usuario.class, "codigo,nome,perfil");
     
     private final UsuarioControl usuarioControl = new UsuarioControl();
+    
+    private Usuario usuario;
 
     /**
      * Creates new form TelaDepartamento
      */
     public TelaUsuario() {
         initComponents();
+        habilitarFormulario(false);
         carregarGrade();
     }
     
@@ -47,12 +50,15 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         pBarraFerramentas = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        bNovoUsuario = new javax.swing.JButton();
+        bSalvarUsuario = new javax.swing.JButton();
+        bRemoverUsuario = new javax.swing.JButton();
+        bCancelarUsuario = new javax.swing.JButton();
         pConteudo = new javax.swing.JPanel();
         txtNome = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tpUsuario = new javax.swing.JTable();
         lblPerfil = new javax.swing.JLabel();
         cbPerfil = new javax.swing.JComboBox<>();
         lblLogin = new javax.swing.JLabel();
@@ -65,33 +71,81 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Cadastro de Usuário");
 
-        jButton1.setText("Adicionar");
+        bNovoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/novo.png"))); // NOI18N
+        bNovoUsuario.setText("Novo");
+        bNovoUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bNovoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNovoUsuarioActionPerformed(evt);
+            }
+        });
+
+        bSalvarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salvar.png"))); // NOI18N
+        bSalvarUsuario.setText("Salvar");
+        bSalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalvarUsuarioActionPerformed(evt);
+            }
+        });
+
+        bRemoverUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        bRemoverUsuario.setText("Remover");
+        bRemoverUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRemoverUsuarioActionPerformed(evt);
+            }
+        });
+
+        bCancelarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
+        bCancelarUsuario.setText("Cancelar");
+        bCancelarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelarUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pBarraFerramentasLayout = new javax.swing.GroupLayout(pBarraFerramentas);
         pBarraFerramentas.setLayout(pBarraFerramentasLayout);
         pBarraFerramentasLayout.setHorizontalGroup(
             pBarraFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pBarraFerramentasLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jButton1)
+                .addGap(65, 65, 65)
+                .addComponent(bNovoUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bSalvarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bRemoverUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bCancelarUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pBarraFerramentasLayout.setVerticalGroup(
             pBarraFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pBarraFerramentasLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jButton1)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pBarraFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bCancelarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pBarraFerramentasLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(bRemoverUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                    .addComponent(bNovoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bSalvarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         lblNome.setText("Nome:");
 
-        jTable1.setModel(otmUsuario);
-        jScrollPane1.setViewportView(jTable1);
+        tpUsuario.setModel(otmUsuario);
+        tpUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tpUsuarioMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tpUsuario);
 
         lblPerfil.setText("Perfil:");
 
-        cbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A - Admin", "S - Supervisor", "B - Básico" }));
+        cbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Básico", "Supervisor", " " }));
 
         lblLogin.setText("Login:");
 
@@ -147,12 +201,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pBarraFerramentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pConteudo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pBarraFerramentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(pBarraFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,12 +220,82 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNovoUsuarioActionPerformed
+        usuario = new Usuario();
+        habilitarFormulario(true);
+        bRemoverUsuario.setEnabled(false);
+        txtNome.requestFocus();
+    }//GEN-LAST:event_bNovoUsuarioActionPerformed
+
+    private void bSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarUsuarioActionPerformed
+        if (validarFormulario()) {
+            usuario.setNome(txtNome.getText().trim());
+            usuario.setLogin(txtLogin.getText());
+            usuario.setSenha(pfSenha.getText());
+            usuario.setPerfil(cbPerfil.getSelectedItem().toString());
+
+            if (usuario.getCodigo() == 0) {
+                try {
+                    usuarioControl.inserirUsuario(usuario);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar o usuário.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else {
+                try {
+                    usuarioControl.alterarUsuario(usuario);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao alterar o usuário.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            habilitarFormulario(false);
+            carregarGrade();
+        }
+    }//GEN-LAST:event_bSalvarUsuarioActionPerformed
+
+    private void bRemoverUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverUsuarioActionPerformed
+        int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o usuário " + usuario + "?");
+        if (opcao == 0) {
+            try {
+                usuarioControl.excluirUsuario(usuario);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o funcionário.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            habilitarFormulario(false);
+            carregarGrade();
+        }
+    }//GEN-LAST:event_bRemoverUsuarioActionPerformed
+
+    private void bCancelarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarUsuarioActionPerformed
+        habilitarFormulario(false);
+    }//GEN-LAST:event_bCancelarUsuarioActionPerformed
+
+    private void tpUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tpUsuarioMouseClicked
+        if (evt.getClickCount() >= 2) {
+            usuario = otmUsuario.getValue(tpUsuario.getSelectedRow());
+
+            txtNome.setText(usuario.getNome());
+            txtLogin.setText(usuario.getLogin());
+            pfSenha.setText(usuario.getSenha());
+            cbPerfil.setSelectedItem(usuario.getPerfil());
+
+            habilitarFormulario(true);
+
+        }
+    }//GEN-LAST:event_tpUsuarioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bCancelarUsuario;
+    private javax.swing.JButton bNovoUsuario;
+    private javax.swing.JButton bRemoverUsuario;
+    private javax.swing.JButton bSalvarUsuario;
     private javax.swing.JComboBox<String> cbPerfil;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPerfil;
@@ -175,7 +303,48 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pBarraFerramentas;
     private javax.swing.JPanel pConteudo;
     private javax.swing.JPasswordField pfSenha;
+    private javax.swing.JTable tpUsuario;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+    
+    
+    private void habilitarFormulario(boolean b) {
+        bNovoUsuario.setEnabled(!b);
+        bSalvarUsuario.setEnabled(b);
+        bRemoverUsuario.setEnabled(b);
+        bCancelarUsuario.setEnabled(b);
+        txtNome.setEnabled(b);
+        cbPerfil.setEnabled(b);
+        txtLogin.setEnabled(b);
+        pfSenha.setEnabled(b);
+        tpUsuario.setEnabled(!b);
+
+        if (!b) {
+            limpaFormulario();
+        }
+    }
+
+    private void limpaFormulario() {
+        usuario = null;
+        txtNome.setText("");
+        txtLogin.setText("");
+        pfSenha.setText("");
+        cbPerfil.setSelectedItem(null);
+    }
+    
+    private boolean validarFormulario() {
+        if (txtNome.getText().trim().length() < 3) {
+            JOptionPane.showMessageDialog(this, "Nome inválido.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            txtNome.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+
 }
+
+
+

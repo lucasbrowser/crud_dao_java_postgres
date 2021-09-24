@@ -21,4 +21,15 @@ public class DepartamentoControl {
         return departamentoDAO.listarTodos();
     }
     
+    public void inserirDepartamento(Departamento departamento) throws Exception {
+        departamentoDAO.inserir(departamento);
+    }
+    
+    public void alterarDepartamento(Departamento departamento) throws Exception {
+        departamentoDAO.alterar(departamento);
+    }
+    
+    public void excluirDepartamento(Departamento departamento) throws Exception {
+        departamentoDAO.excluir(departamento);
+    }
 }

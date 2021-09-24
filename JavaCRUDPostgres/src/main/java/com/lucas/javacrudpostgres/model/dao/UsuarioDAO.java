@@ -20,7 +20,7 @@ public class UsuarioDAO extends ConexaoPostgres{
     
     public List<Usuario> listarTodos() throws Exception {
         List<Usuario> lUsuario = new LinkedList<>();
-        try{
+        try {
             this.conectar();
             String sql = "SELECT * FROM USUARIO ORDER BY CODIGO";
             PreparedStatement ps = this.getCon().prepareStatement(sql);
@@ -34,17 +34,18 @@ public class UsuarioDAO extends ConexaoPostgres{
                 usuario.setSenha(rs.getString("SENHA"));
                 lUsuario.add(usuario);
             }
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             this.fecharConexao();
         }
+        
         return lUsuario;
     }
     
     public Usuario logar(String login, String senha) throws Exception {
         Usuario usuario = new Usuario();
-        try{
+        try {
             this.conectar();
             String sql = "SELECT * FROM USUARIO WHERE LOGIN=? AND SENHA=?";
             PreparedStatement ps = this.getCon().prepareStatement(sql);
@@ -60,12 +61,65 @@ public class UsuarioDAO extends ConexaoPostgres{
                 usuario.setSenha(rs.getString("SENHA"));
             }
             
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             this.fecharConexao();
         }
         return usuario;
     }
     
+    public void inserir(Usuario usuario) throws Exception {
+        try {
+            this.conectar();
+            this.insertSQL("INSERT INTO USUARIO (NOME, PERFIL, LOGIN, SENHA) "
+                    + "VALUES ("
+                    + "'" + usuario.getNome() + "',"
+                    + "'" + usuario.getPerfil() + "',"
+                    + "'" + usuario.getLogin() + "',"
+                    + "'" + usuario.getSenha() + "'"
+                    + ");"
+            );
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+    }
+    
+    public void alterar(Usuario usuario) throws Exception {
+        try {
+            this.conectar();
+            this.executarUpdateDeleteSQL(
+                "UPDATE USUARIO SET "
+                    + "NOME = '" + usuario.getNome() + "',"
+                    + "PERFIL = '" + usuario.getPerfil() + "',"
+                    + "LOGIN = '" + usuario.getLogin() + "',"
+                    + "SENHA = '" + usuario.getSenha() + "'"
+                + " WHERE "
+                    + "CODIGO = '" + usuario.getCodigo() + "'"
+                + ";"
+            );
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+    }
+    
+    public void excluir(Usuario usuario) throws Exception {
+        try {
+            this.conectar();
+            this.executarUpdateDeleteSQL(
+                "DELETE FROM USUARIO "
+                + " WHERE "
+                    + "CODIGO = '" + usuario.getCodigo() + "'"
+                + ";"
+            );
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+    }
 }
