@@ -7,10 +7,20 @@ package com.lucas.javacrudpostgres.model.dao;
 
 import com.lucas.javacrudpostgres.bd.ConexaoPostgres;
 import com.lucas.javacrudpostgres.model.domain.Departamento;
+import java.awt.Desktop;
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -104,6 +114,31 @@ public class DepartamentoDAO extends ConexaoPostgres{
             e.printStackTrace();
         }finally{
             this.fecharConexao();
+        }
+    }
+    
+    public void departamentoRelatorio() throws JRException, Exception{
+        try{
+            this.conectar();
+            Statement stm = this.getCon().createStatement();
+            String query;
+            query = "SELECT * FROM DEPARTAMENTO ORDER BY CODIGO";
+            ResultSet rs = stm.executeQuery(query);
+            String relatorio = "src/main/resources/reports/Departamento.jasper";
+            JRResultSetDataSource jrrs = new JRResultSetDataSource(rs);
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, null, jrrs);
+            JasperViewer.viewReport(jp, false);
+            String nomeArquivo = "src/main/resources/reports/Departamento.pdf";
+            JasperExportManager.exportReportToPdfFile(jp, nomeArquivo);
+            File file = new File(nomeArquivo);
+            try {
+                Desktop.getDesktop().open(file);
+            }catch (Exception e) {
+                JOptionPane.showConfirmDialog(null, e);
+            }
+            file.deleteOnExit();
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

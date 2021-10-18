@@ -32,4 +32,8 @@ public class DepartamentoControl {
     public void excluirDepartamento(Departamento departamento) throws Exception {
         departamentoDAO.excluir(departamento);
     }
+    
+    public void imprimeRelatorio() throws Exception{
+        departamentoDAO.departamentoRelatorio();      
+    }
 }
