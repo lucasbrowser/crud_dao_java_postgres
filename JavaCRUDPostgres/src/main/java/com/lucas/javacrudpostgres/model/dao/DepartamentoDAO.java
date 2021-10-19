@@ -37,7 +37,7 @@ public class DepartamentoDAO extends ConexaoPostgres{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Departamento departamento = new Departamento();
-                departamento.setCodigo(rs.getInt("CODIGO"));
+                departamento.setCodigo(rs.getLong("CODIGO"));
                 departamento.setDescricao(rs.getString("DESCRICAO"));
                 lDepartamento.add(departamento);
             }
@@ -58,7 +58,7 @@ public class DepartamentoDAO extends ConexaoPostgres{
             ps.setInt(1, codigo);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                departamento.setCodigo(rs.getInt("CODIGO"));
+                departamento.setCodigo(rs.getLong("CODIGO"));
                 departamento.setDescricao(rs.getString("DESCRICAO"));
             }
         }catch(Exception e){

@@ -14,11 +14,11 @@ import com.towel.el.annotation.Resolvable;
 public class Departamento {
     
     @Resolvable(colName="Código")
-    private long codigo;
+    private Long codigo;
     @Resolvable(colName="Descrição")
     private String descricao;
 
-    public long getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 

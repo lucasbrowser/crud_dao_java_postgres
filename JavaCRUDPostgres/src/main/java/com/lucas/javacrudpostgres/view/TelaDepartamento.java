@@ -7,7 +7,9 @@ package com.lucas.javacrudpostgres.view;
 
 import com.lucas.javacrudpostgres.control.DepartamentoControl;
 import com.lucas.javacrudpostgres.model.domain.Departamento;
+import com.lucas.javacrudpostgres.report.Relatorio;
 import com.towel.swing.table.ObjectTableModel;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +23,8 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
     private final DepartamentoControl departamentoControl = new DepartamentoControl();
     
     private Departamento departamento;
+    
+    private Relatorio relatorio;
 
     /**
      * Creates new form TelaDepartamento
@@ -248,12 +252,9 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tpDepartamentoMouseClicked
 
     private void bImprimirDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bImprimirDeptoActionPerformed
-
-        try {
-            departamentoControl.imprimeRelatorio();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao imprimir o relatório.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+   
+        gerarRelatorioDepartamento();
+       
     }//GEN-LAST:event_bImprimirDeptoActionPerformed
 
 
@@ -286,6 +287,19 @@ public class TelaDepartamento extends javax.swing.JInternalFrame {
     private void limpaFormulario() {
         departamento = null;
         txtDepartamento.setText("");
+    }
+    
+    private void gerarRelatorioDepartamento() {
+        try {
+            relatorio = new Relatorio();
+            List<Departamento> lDepto = departamentoControl.listarTodos();
+            String pathRelatorio = "src/main/resources/reports/Departamento.jasper";
+            String pathRelatorioPdf = "src/main/resources/reports/Departamento.pdf";
+            relatorio.gerarRelatorio(lDepto, null, pathRelatorio, pathRelatorioPdf);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao imprimir o relatório.\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
 
 }
